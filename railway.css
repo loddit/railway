@@ -1,8 +1,12 @@
 /* CSS declarations go here */
 body {background-color: black}
-svg#stations {position: absolute;z-index:0}
+svg#stations {position: absolute;z-index:1}
 svg#railways {position: absolute;z-index:-1}
-polyline {stroke: white;stroke-width:1;opacity:0.03}
-circle.stop {opacity:0.4}
+polyline {opacity:0.05;stroke:white}
+polyline.highlight {stroke:#adf;opacity:0.5;position:absolute;z-index:0}
+circle {cursor: pointer}
+circle.stop {opacity:0.5}
 circle.city {opacity:0.6}
-circle.capital {opacity:0.8}
+circle.capital {opacity:0.7}
+circle:hover {stroke:#99ddff;stroke-width:2;opacity:1}
+circle[data-toggled] {stroke:#99ddff;stroke-width:2;opacity:1}
