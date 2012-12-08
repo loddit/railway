@@ -1,0 +1,8 @@
+/* CSS declarations go here */
+body {background-color: black}
+svg#stations {position: absolute;z-index:0}
+svg#railways {position: absolute;z-index:-1}
+polyline {stroke: white;stroke-width:1;opacity:0.03}
+circle.stop {opacity:0.4}
+circle.city {opacity:0.6}
+circle.capital {opacity:0.8}
