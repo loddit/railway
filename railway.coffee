@@ -1,8 +1,14 @@
+get_train_class = (number) ->
+  if number[0] in ['0','1','2','3','4','5','6','7','8','9']
+    'N'
+  else
+    number[0]
+
 if Meteor.isClient
   width = 1200
   height = 800
   x = d3.scale.linear().domain([75, 135]).range([0, width])
-  y = d3.scale.linear().domain([55,15]).range([0, height])
+  y = d3.scale.linear().domain([55, 15]).range([0, height])
 
   d3.json '/railways.json', (railways)->
     window.railways = railways
@@ -11,8 +17,11 @@ if Meteor.isClient
                .data(railways)
     lines.enter().append("svg:polyline")
          .attr("points",(railway,index) -> (_.map(railway.stops,(stop)-> [x(stop.lng),y(stop.lat)].join ',')).join(' '))
-         .attr("data-type",(railway,index) -> railway.number[0] if railway.number[0] not in [0,1,2,3,4,5,6,7,8,9])
+         .attr("class",(railway,index) -> get_train_class(railway.number))
          .attr("id",(railway,index) -> railway.number.split('/')[0])
+         .attr("fill","none")
+
+    $('#meta #railways_count').text(railways.length)
 
   d3.json '/stations.json', (stations)->
     window.stations = stations
@@ -26,11 +35,13 @@ if Meteor.isClient
     .attr("r",(d,i) -> {capital:3,city:2,stop:1}[d.type])
     .attr("fill","white")
     .attr("class",(d,i) -> d.type)
-    .attr("title",(d,i) -> d.chinese)
-    .attr("rel","tooltip")
     .attr("data-railways",(d,i) -> d.railways.join(',') if d.railways)
+    .append("svg:title")
+    .text((d,i) -> d.chinese)
+    .attr("rel","tooltip")
+    .attr("data-original-title",(d,i) -> d.chinese)
 
-    circles.exit()
+    $('#meta #stations_count').text(stations.length)
 
    $ ->
      $('body').delegate('circle','click', (e) ->
@@ -49,10 +60,38 @@ if Meteor.isClient
              railway.attr('class','highlight')
            else
              railway.attr('class','')
-
        )
      )
-    $('circle').tooltip()
+
+     $('body').delegate 'input[type="checkbox"]','change', (e) ->
+       if e.target.checked
+          $("polyline." + $(this).val()).show()
+       else
+          $("polyline." + $(this).val()).hide()
+     
+
+     $('body').delegate '.label','hover', (e) ->
+         color = $(this).data('color')
+         $(this).attr('style',"background-color: #{color}")
+
+     $('body').delegate '.label','mouseleave', (e) ->
+       toggled = $(this).attr('data-toggled')
+       if not toggled
+         $(this).attr('style','')
+    
+     $('body').delegate('.label','click', (e) ->
+       toggled = $(this).attr('data-toggled')
+       if toggled
+         $(this).removeAttr('data-toggled')
+         $("polyline." + $(this).parent().find('input[type="checkbox"]').val()).attr('style', "")
+       else
+         $(this).attr('data-toggled','true')
+         color = $(this).data('color')
+         $(this).attr('style',"background-color: #{color}")
+         $("polyline." + $(this).parent().find('input[type="checkbox"]').val()).attr('style', "stroke: #{color}; opacity: 0.2")
+         $(this).parent().find('input[type="checkbox"]').attr('checked','true')
+     )
+
 
 if Meteor.isServer
   Meteor.startup ->
