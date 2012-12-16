@@ -3,14 +3,14 @@ body {padding: 10px 20px; font-weight: serif; background-color: black; color: #8
 
 #meta {position: fixed; z-index: 5}
 
-h1 {font-family: 'Exo', sans-serif;font-weight: normal; font-size: 28px; color: #eee; margin: 0}
+h1 {font-family: 'Exo', sans-serif;font-weight: normal; font-size: 24px; color: #eee; margin: 0}
 span {color: #ccc}
 li {list-style: none}
 ul {margin: 10px 0}
 label {display: inline; font-size: 10px;font-family: Consolas, Menlo, Monaco, monospace, serif} 
 input[type="checkbox"] {margin: 2px 0; opacity: 0.8}
 
-.label {float: none;}
+.label {float: none; cursor: pointer}
 svg#stations {position: absolute;}
 svg#railways {position: absolute;z-index:-1}
 polyline {opacity:0.03;stroke:white}

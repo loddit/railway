@@ -32,7 +32,7 @@ if Meteor.isClient
     circles.enter().append("svg:circle")
     .attr("cx",(d,i) -> x(d.lng))
     .attr("cy",(d,i) -> y(d.lat))
-    .attr("r",(d,i) -> {capital:3,city:2,stop:1}[d.type])
+    .attr("r",(d,i) -> {capital:2.5,city:1.7,stop:1}[d.type])
     .attr("fill","white")
     .attr("class",(d,i) -> d.type)
     .attr("data-railways",(d,i) -> d.railways.join(',') if d.railways)
@@ -68,7 +68,7 @@ if Meteor.isClient
           $("polyline." + $(this).val()).show()
        else
           $("polyline." + $(this).val()).hide()
-     
+
 
      $('body').delegate '.label','hover', (e) ->
          color = $(this).data('color')
@@ -78,7 +78,7 @@ if Meteor.isClient
        toggled = $(this).attr('data-toggled')
        if not toggled
          $(this).attr('style','')
-    
+
      $('body').delegate('.label','click', (e) ->
        toggled = $(this).attr('data-toggled')
        if toggled
@@ -88,7 +88,7 @@ if Meteor.isClient
          $(this).attr('data-toggled','true')
          color = $(this).data('color')
          $(this).attr('style',"background-color: #{color}")
-         $("polyline." + $(this).parent().find('input[type="checkbox"]').val()).attr('style', "stroke: #{color}; opacity: 0.2")
+         $("polyline." + $(this).parent().find('input[type="checkbox"]').val()).attr('style', "stroke: #{color}; opacity: 0.15; z-index:1")
          $(this).parent().find('input[type="checkbox"]').attr('checked','true')
      )
 
