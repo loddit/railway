@@ -3,8 +3,9 @@ body {padding: 10px 20px; font-weight: serif; background-color: black; color: #8
 
 #meta {position: fixed; z-index: 5}
 
-h1 {font-family: 'Exo', sans-serif;font-weight: normal; font-size: 24px; color: #eee; margin: 0}
+h1 {font-family: 'Exo', sans-serif;font-weight: normal; font-size: 27px; color: #eee; margin: 0}
 span {color: #ccc}
+a {color: #9cf}
 li {list-style: none}
 ul {margin: 10px 0}
 label {display: inline; font-size: 10px;font-family: Consolas, Menlo, Monaco, monospace, serif} 
