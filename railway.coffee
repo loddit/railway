@@ -7,9 +7,11 @@ get_train_class = (number) ->
 if Meteor.isClient
   width = 1200
   height = 800
-  x = d3.scale.linear().domain([75, 135]).range([0, width]) #Mercator projection
+  #Mercator projection
+  x = d3.scale.linear().domain([75, 135]).range([0, width])
   y = d3.scale.linear().domain([55, 15]).range([0, height])
-  xy = d3.geo.albers().origin([106,44.5]).parallels([29.5,45]).scale(1060) #Albers projection
+  #Albers projection
+  xy = d3.geo.albers().origin([106,42]).parallels([29.5,33.5]).scale(1060)
 
   d3.json '/railways.json', (railways)->
     window.railways = railways
@@ -37,8 +39,18 @@ if Meteor.isClient
     .attr("fill","white")
     .attr("class",(d,i) -> d.type)
     .attr("data-railways",(d,i) -> d.railways.join(',') if d.railways)
-    .append("svg:title")
-    .text((d,i) -> d.chinese)
+    .tooltip((d, i) ->
+      {
+        type: "tooltip",
+        text: d.chinese,
+        detection: "shape",
+        placement: "fixed",
+        gravity: "top",
+        position: xy([d.lng,d.lat]),
+        displacement: [0,-38],
+        mousemove: false
+      }
+    )
 
     $('#meta #stations_count').text(stations.length)
 
@@ -87,7 +99,7 @@ if Meteor.isClient
         $(this).attr('data-toggled','true')
         color = $(this).data('color')
         $(this).attr('style',"background-color: #{color}")
-        $("polyline." + $(this).parent().find('input[type="checkbox"]').val()).attr('style', "stroke: #{color}; opacity: 0.15; z-index:1")
+        $("polyline." + $(this).parent().find('input[type="checkbox"]').val()).attr('style', "stroke: #{color} opacity: 0.15 z-index:1")
         $(this).parent().find('input[type="checkbox"]').attr('checked','true')
     )
 
