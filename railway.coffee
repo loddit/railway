@@ -95,12 +95,23 @@ if Meteor.isClient
     $('body').delegate 'input[type="checkbox"]','hover', (e) ->
       $(e.target).tooltip('show')
 
+    $('body').delegate 'input[type="text"]','focus', (e) ->
+        $("polyline").css('opacity',0.01)
+
+    $('body').delegate 'input[type="text"]','blur', (e) ->
+        $("polyline").css('opacity','')
+        $(e.target).parent().addClass("error")
+
     $('body').delegate 'input[type="text"]','change', (e) ->
       id = $(e.target).val().toUpperCase()
       railway = $("##{id}")
+      $('.chasing').css('opacity','').each -> remove_class($(this),'chasing')
       if railway.length == 1
-        $('.chasing').each -> remove_class($(this),'chasing')
+        railway.css('opacity',0.8)
         add_class(railway,'chasing')
+        $(e.target).parent().removeClass("error")
+      else
+        $(e.target).parent().addClass("error")
 
   Meteor.startup =>
     $('#filters li').each () -> $(this).css('background-color',$(this).data('color'))
