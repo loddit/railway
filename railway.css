@@ -1,5 +1,5 @@
 /* CSS declarations go here */
-body {padding: 10px 20px; font-weight: serif; background-color: black; color: #888}
+body {padding: 10px 20px; font-family: serif; background-color: black; color: #888;}
 
 #meta {position: fixed; z-index: 5}
 
@@ -8,7 +8,7 @@ span {color: #ccc}
 a {color: #9cf}
 li {list-style: none}
 ul {margin: 10px 0}
-label {display: inline; font-size: 10px;font-family: Consolas, Menlo, Monaco, monospace, serif} 
+label {display: inline; font-size: 10px;font-family: Consolas, Menlo, Monaco, monospace, serif}
 input[type="checkbox"] {margin: 2px 0; opacity: 0.8}
 
 .label {float: none; cursor: pointer}
