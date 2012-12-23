@@ -2,20 +2,20 @@
   -webkit-appearance: none;
   -webkit-animation-name: fadein;
   -webkit-animation-iteration-count: 1;
-  -webkit-animation-duration: 0.4s;
+  -webkit-animation-duration: .4s;
   -moz-appearance: none;
   -moz-animation-name: fadein;
   -moz-animation-iteration-count: 1;
-  -moz-animation-duration: 0.4s;
+  -moz-animation-duration: .4s;
 }
 
 @-webkit-keyframes fadein {
-  from { opacity: 0.1}
-  to { opacity: 0.5}
+  from { opacity: .1}
+  to { opacity: .5}
 }
 @-moz-keyframes fadein {
-  from { opacity: 0.1}
-  to { opacity: 0.5}
+  from { opacity: .1}
+  to { opacity: .5}
 }
 
 
@@ -29,31 +29,31 @@ span {color: #ccc}
 a {color: #9cf}
 li {list-style: none}
 ul {margin: 10px 5px;display:inline-block}
-input[type="checkbox"] {margin: 2px 0; opacity: 0.4}
-input[type="text"] {padding:0px 4px;background-color:#222;border-color:#111;opacity:0.8;color:#fff;margin: 10px 5px;font-size:11px}
+input[type="checkbox"] {margin: 2px 0; opacity: .4}
+input[type="text"] {padding:0px 4px;background-color:#222;border-color:#111;opacity:.8;color:#fff;margin: 10px 5px;font-size:11px;margin:0}
 
 .label {padding:0px 1px 0px 2px}
 svg#stations {position: absolute;}
 svg#railways {position: absolute;z-index:-1}
-polyline {opacity:0.03;stroke:white}
+polyline {opacity:.025;stroke:white}
 polyline.highlight {
   stroke:#6c6;
-  opacity:0.3;
+  opacity:.25;
   position:absolute;
   z-index:2;
   .fadein
 }
 polyline.chasing{
   stroke:#39c;
-  opacity:0.8;
+  opacity:.7;
   position:absolute;
   z-index:2;
   .fadein
 }
 circle {cursor: pointer}
-circle.stop {opacity:0.3;z-index:1}
-circle.city {opacity:0.4;z-index:2}
-circle.capital {opacity:0.5;z-index:3}
+circle.stop {opacity:.3;z-index:1}
+circle.city {opacity:.4;z-index:2}
+circle.capital {opacity:.5;z-index:3}
 circle:hover {stroke:#6c6;stroke-width:2;opacity:1}
 circle[data-toggled] {stroke:#6c6;stroke-width:2;opacity:1}
 

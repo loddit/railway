@@ -96,11 +96,13 @@ if Meteor.isClient
       $(e.target).tooltip('show')
 
     $('body').delegate 'input[type="text"]','focus', (e) ->
-        $("polyline").css('opacity',0.01)
+        $("polyline").css('opacity',0.015)
 
     $('body').delegate 'input[type="text"]','blur', (e) ->
         $("polyline").css('opacity','')
-        $(e.target).parent().addClass("error")
+        $(e.target).parent().removeClass("error")
+        $('.chasing').css('opacity','').each -> remove_class($(this),'chasing')
+        $(e.target).val('')
 
     $('body').delegate 'input[type="text"]','change', (e) ->
       id = $(e.target).val().toUpperCase()
