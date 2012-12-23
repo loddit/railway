@@ -4,14 +4,26 @@ get_train_class = (number) ->
   else
     number[0]
 
+add_class = (target,class_name) ->
+  classes = (target.attr('class') or '').split(' ')
+  if class_name not in classes
+    classes.push class_name
+    target.attr('class',classes.join(' '))
+
+remove_class = (target,class_name) ->
+  classes = (target.attr('class') or '').split(' ')
+  if class_name in classes
+    classes.pop(class_name)
+    target.attr('class',classes.join(' '))
+
 if Meteor.isClient
-  width = 1200
-  height = 800
+  width = 1024
+  height = 760
   #Mercator projection
   x = d3.scale.linear().domain([75, 135]).range([0, width])
   y = d3.scale.linear().domain([55, 15]).range([0, height])
   #Albers projection
-  xy = d3.geo.albers().origin([106,42]).parallels([29.5,33.5]).scale(1060)
+  xy = d3.geo.albers().origin([103,42]).parallels([29.5,33.5]).scale(1150)
 
   d3.json '/railways.json', (railways)->
     window.railways = railways
@@ -47,7 +59,7 @@ if Meteor.isClient
         placement: "fixed",
         gravity: "top",
         position: xy([d.lng,d.lat]),
-        displacement: [0,-38],
+        displacement: [0,-40],
         mousemove: false
       }
     )
@@ -68,41 +80,30 @@ if Meteor.isClient
         if railway_id
           railway = $("#" + railway_id.split('/')[0])
           if !toggled
-            railway.attr('class','highlight')
+            add_class(railway,'highlight')
           else
-            railway.attr('class','')
+            remove_class(railway,'highlight')
       )
     )
 
     $('body').delegate 'input[type="checkbox"]','change', (e) ->
       if e.target.checked
-         $("polyline." + $(this).val()).show()
+         $("polyline." + $(this).val()).css('stroke',$(this).parent().data('color')).each -> add_class($(this),'highlight')
       else
-         $("polyline." + $(this).val()).hide()
+         $("polyline." + $(this).val()).css('stroke','').each -> remove_class($(this),'highlight')
 
+    $('body').delegate 'input[type="checkbox"]','hover', (e) ->
+      $(e.target).tooltip('show')
 
-    $('body').delegate '.label','hover', (e) ->
-        color = $(this).data('color')
-        $(this).attr('style',"background-color: #{color}")
+    $('body').delegate 'input[type="text"]','change', (e) ->
+      id = $(e.target).val().toUpperCase()
+      railway = $("##{id}")
+      if railway.length == 1
+        $('.chasing').each -> remove_class($(this),'chasing')
+        add_class(railway,'chasing')
 
-    $('body').delegate '.label','mouseleave', (e) ->
-      toggled = $(this).attr('data-toggled')
-      if not toggled
-        $(this).attr('style','')
-
-    $('body').delegate('.label','click', (e) ->
-      toggled = $(this).attr('data-toggled')
-      if toggled
-        $(this).removeAttr('data-toggled')
-        $("polyline." + $(this).parent().find('input[type="checkbox"]').val()).attr('style', "")
-      else
-        $(this).attr('data-toggled','true')
-        color = $(this).data('color')
-        $(this).attr('style',"background-color: #{color}")
-        $("polyline." + $(this).parent().find('input[type="checkbox"]').val()).attr('style', "stroke: #{color} opacity: 0.15 z-index:1")
-        $(this).parent().find('input[type="checkbox"]').attr('checked','true')
-    )
-
+  Meteor.startup =>
+    $('#filters li').each () -> $(this).css('background-color',$(this).data('color'))
 
 if Meteor.isServer
   Meteor.startup ->

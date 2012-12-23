@@ -1,0 +1,67 @@
+.fadein {
+  -webkit-appearance: none;
+  -webkit-animation-name: fadein;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-duration: 0.4s;
+  -moz-appearance: none;
+  -moz-animation-name: fadein;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-duration: 0.4s;
+}
+
+@-webkit-keyframes fadein {
+  from { opacity: 0.1}
+  to { opacity: 0.5}
+}
+@-moz-keyframes fadein {
+  from { opacity: 0.1}
+  to { opacity: 0.5}
+}
+
+
+body {padding: 10px 20px; font-family: serif; background-color: black; color: #888;}
+
+#meta {position: fixed; z-index: 5}
+#filters {position: fixed; z-index: 5; left:300px;}
+
+h1 {font-family: 'Exo', sans-serif;font-weight: normal; font-size: 27px; color: #eee; margin: 0}
+span {color: #ccc}
+a {color: #9cf}
+li {list-style: none}
+ul {margin: 10px 5px;display:inline-block}
+input[type="checkbox"] {margin: 2px 0; opacity: 0.4}
+input[type="text"] {padding:0px 4px;background-color:#222;border-color:#111;opacity:0.8;color:#fff;margin: 10px 5px;font-size:11px}
+
+.label {padding:0px 1px 0px 2px}
+svg#stations {position: absolute;}
+svg#railways {position: absolute;z-index:-1}
+polyline {opacity:0.03;stroke:white}
+polyline.highlight {
+  stroke:#6c6;
+  opacity:0.3;
+  position:absolute;
+  z-index:2;
+  .fadein
+}
+polyline.chasing{
+  stroke:#39c;
+  opacity:0.8;
+  position:absolute;
+  z-index:2;
+  .fadein
+}
+circle {cursor: pointer}
+circle.stop {opacity:0.3;z-index:1}
+circle.city {opacity:0.4;z-index:2}
+circle.capital {opacity:0.5;z-index:3}
+circle:hover {stroke:#6c6;stroke-width:2;opacity:1}
+circle[data-toggled] {stroke:#6c6;stroke-width:2;opacity:1}
+
+.tooltip {font-family: Monaco, Menlo, Consolas, "Courier New", monospace}
+.tooltip.top {box-sizing:border-box}
+.tooltip.top .tooltip-arrow {border-top-color: #171; position: relative; left: 0; margin-top:-1px; margin-left: -9px}
+.tooltip.top .tooltip-inner {background-color: #171;  position: relative; left: -50%; margin-top:1px; margin-left: -9px}
+
+.tooltip.bottom {box-sizing:border-box}
+.tooltip.bottom .tooltip-arrow {border-top-color: #666; color: white}
+.tooltip.bottom .tooltip-inner {background-color: #666; color: white}

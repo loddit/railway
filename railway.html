@@ -9,35 +9,18 @@
     <h1>Railway Map of China</h1>
     <small>a data visualization <a href="http://github.com/loddit/railway"> project</a>. powered by <a href="http://meteor.com" > Meteor</a></small>
     <p>Showing <span id="stations_count"></span> stations &amp; <span id="railways_count"></span> lines</p>
+  </div>
+
+  <div id="filters">
     <ul>
-      <li>
-        <input type="checkbox" name="class" value="N" checked/>
-        <label class="label" data-color="#c60">[N]Normal</label>
-      </li>
-      <li>
-        <input type="checkbox" name="class" value="K" checked/>
-        <label class="label" data-color="#66f">[K]Ordinary</label>
-      </li>
-      <li>
-        <input type="checkbox" name="class" value="T" checked/>
-        <label class="label" data-color="#c30">[T]Express</label>
-      </li>
-      <li>
-        <input type="checkbox" name="class" value="D" checked/>
-        <label class="label" data-color="#805">[D]CRH</label>
-      </li>
-      <li>
-        <input type="checkbox" name="class" value="Z" checked/>
-        <label class="label" data-color="#c39">[Z]Through</label>
-      </li>
-      <li>
-        <input type="checkbox" name="class" value="G" checked/>
-        <label class="label" data-color="#4a4">[G]HSR</label>
-      </li>
-      <li>
-        <input type="checkbox" name="class" value="C" checked/>
-        <label class="label" data-color="#66c">[C]City</label>
-      </li>
+      <li class="label" data-color="#c60"><input type="checkbox" name="class" value="N" rel="tooltip" data-placement="bottom" data-original-title="Normal[N]"/></li>
+      <li class="label" data-color="#66f"><input type="checkbox" name="class" value="K" rel="tooltip" data-placement="bottom" data-original-title="Ordinary[K]"/></li>
+      <li class="label" data-color="#c30"><input type="checkbox" name="class" value="T" rel="tooltip" data-placement="bottom" data-original-title="Express[T]"/></li>
+      <li class="label" data-color="#805"><input type="checkbox" name="class" value="D" rel="tooltip" data-placement="bottom" data-original-title="CRH[D]" /></li>
+      <li class="label" data-color="#c39"><input type="checkbox" name="class" value="Z" rel="tooltip" data-placement="bottom" data-original-title="Through[Z]"/></li>
+      <li class="label" data-color="#4a4"><input type="checkbox" name="class" value="G" rel="tooltip" data-placement="bottom" data-original-title="HSR[G]"/></li>
+      <li class="label" data-color="#66c"><input type="checkbox" name="class" value="C" rel="tooltip" data-placement="bottom" data-original-title="City[C]"/></li>
     </ul>
+    <input id="train_number" type="text" class="input-small" placeholder="Train number">
   </div>
 </body>
